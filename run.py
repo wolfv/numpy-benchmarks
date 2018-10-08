@@ -3,6 +3,7 @@ import tempfile
 import os.path
 import random
 import stat
+import time
 
 
 class PythonExtractor(object):
@@ -108,7 +109,7 @@ class HopeExtractor(ParakeetExtractor):
 
 
 def run(filenames, extractors):
-    location = tempfile.mkdtemp(prefix='rundir_', dir='.')
+    location = tempfile.mkdtemp(prefix='rundir_', suffix=time.strftime("%Y%m%d-%H%M%S"), dir='.')
     shelllines = []
     for filename in filenames:
         for extractor in extractors:
@@ -144,7 +145,8 @@ if __name__ == '__main__':
     parser.add_argument('benchmarks', nargs='*',
                         help='benchmark to run, default is benchmarks/*',
                         default=glob.glob('benchmarks/*.py'))
-    default_targets=['xtensor', 'python', 'pythran', 'parakeet', 'numba', 'pypy', 'hope']
+    # default_targets=['xtensor', 'python', 'pythran', 'parakeet', 'numba', 'pypy', 'hope']
+    default_targets=['xtensor', 'pythran', 'python']
     # default_targets=['xtensor']
     parser.add_argument('-t', action='append', dest='targets', metavar='TARGET',
                         help='target compilers to use, default is %s' % ', '.join(default_targets))

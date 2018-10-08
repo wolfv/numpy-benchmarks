@@ -3,7 +3,7 @@ project(tutorial)
 
 # set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "/home/wolfv/Programs/xtensor-python/cmake")
 
-set(CMAKE_CXX_FLAGS "-O3 -std=c++14 -march=native -g")
+set(CMAKE_CXX_FLAGS "-O3 -std=c++14 -march=native -mtune=native -g")
 
 find_package(xtensor)
 find_package(xtl)

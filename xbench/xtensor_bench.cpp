@@ -15,20 +15,25 @@ namespace xt
 	using tensor = xt::pytensor<T, N, xt::layout_type::row_major>;
 }
 
-#include "../benchmarks/allpairs_distances_loops.hpp"
-#include "../benchmarks/arc_distance.hpp"
-#include "../benchmarks/laplacien.hpp"
-#include "../benchmarks/diffusion.hpp"
-#include "../benchmarks/log_likelihood.hpp"
-#include "../benchmarks/reverse_cumsum.hpp"
-
+// #include "../benchmarks/allpairs_distances_loops.hpp"
+// #include "../benchmarks/arc_distance.hpp"
+// #include "../benchmarks/laplacien.hpp"
+// #include "../benchmarks/diffusion.hpp"
+// #include "../benchmarks/log_likelihood.hpp"
+// #include "../benchmarks/reverse_cumsum.hpp"
+// #include "../benchmarks/hyantes.hpp"
+// #include "../benchmarks/harris.hpp"
+// #include "../benchmarks/conv.hpp"
+// #include "../benchmarks/create_grid.hpp"
+// #include "../benchmarks/julia.hpp"
+#include "../benchmarks/aplusb.hpp"
 
 namespace py = pybind11;
 
-auto xtensor_laplacien(xt::pytensor<double, 3>& arr)
-{
-    return xt::impl::laplacian_view(arr);
-}
+// auto xtensor_laplacien(xt::pytensor<double, 3>& arr)
+// {
+//     return xt::impl::laplacian_view(arr);
+// }
 
 auto testfun()
 {
@@ -45,11 +50,17 @@ auto cumsum(xt::tensor<double, 1>& a)
 PYBIND11_MODULE(xbench, m)
 {
     xt::import_numpy();
-    m.def("laplacien", xtensor_laplacien);
-    m.def("diffusion", xt::diffusion);
-    m.def("arc_distance", xt::arc_distance);
-    m.def("log_likelihood", xt::log_likelihood);
-    m.def("reverse_cumsum", xt::reverse_cumsum);
-    m.def("cumsum", cumsum);
-    m.def("allpairs_distances_loops", xt::allpairs_distances_loops);
+    m.def("aplusb", xt::aplusb);
+    // m.def("conv", xt::conv);
+    // m.def("laplacien", xtensor_laplacien);
+    // m.def("diffusion", xt::diffusion);
+    // m.def("arc_distance", xt::arc_distance);
+    // m.def("log_likelihood", xt::log_likelihood);
+    // m.def("reverse_cumsum", xt::reverse_cumsum);
+    // m.def("cumsum", cumsum);
+    // m.def("allpairs_distances_loops", xt::allpairs_distances_loops);
+    // m.def("hyantes", xt::hyantes);
+    // m.def("harris", xt::harris);
+    // m.def("create_grid", xt::create_grid);
+    // m.def("julia", xt::julia);
 }
